@@ -101,4 +101,22 @@ public class BoardDAO {
 		
 		return boardList;
 	}
+	
+	public BoardDTO read(int boardNumber) {
+		BoardDTO boardDTO = null;
+		
+		try {
+			sqlSession=sqlSessionFactory.openSession();
+			sqlSession.update("boardReadCount",boardNumber);
+			boardDTO=sqlSession.selectOne("boardRead", boardNumber);
+			sqlSession.commit();
+		}catch(Exception e) {
+			e.printStackTrace();
+			sqlSession.rollback();
+		}finally {
+			sqlSession.close();
+		}
+		
+		return boardDTO;
+	}
 }

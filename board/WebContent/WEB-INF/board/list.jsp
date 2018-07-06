@@ -40,9 +40,9 @@
 		<c:forEach var="board" items="${boardList }">
 			<tr>
 				<td>${board.boardNumber }</td>
-				<td>${board.subject }</td>
+				<td><a href="${root }/board/read.do?boardNumber=${board.boardNumber }&pageNumber=${currentPage}">${board.subject }</a></td>
 				<td>${board.writer }</td>
-				<td><fmt:formatDate type = "date" value="${board.writeDate }"/></td>
+				<td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.writeDate }"/></td>
 				<td>0</td>
 			</tr>
 		</c:forEach>
@@ -52,6 +52,35 @@
 	<br/>
 	
 	<!-- 페이지 번호 -->
-	<center></center>
+	<center>
+		<c:if test="${count >0}">
+			<c:set var="pageBlock" value="${2 }"/>
+			<!-- 전체 페이지 번호 = 총 레코드 수/페이지당 게시물 수 -->
+			<c:set var="pageCount" value="${count/boardSize + (count%boardSize==0?0:1)}"/>
+			
+			<fmt:parseNumber integerOnly="true" var="result" value="${(currentPage-1)/pageBlock }"/>
+			<c:set var="startPage" value="${result*pageBlock+1 }"/>
+			<c:set var="endPage" value="${startPage+pageBlock-1 }"/>
+			
+			<c:if test="${endPage>pageCount }">
+				<c:set var="endPage" value="${pageCount }"/>
+			</c:if>
+			
+			
+			<c:if test="${startPage>pageBlock }">
+				<a href="${root }/board/list.do?pageNumber=${startPage-pageBlock}">[prev]</a>
+			</c:if>
+			
+			
+			<c:forEach var="i" begin="${startPage }" end="${endPage }">
+				<a href="${root }/board/list.do?pageNumber=${i}">[${i }]</a>
+			</c:forEach>
+			
+			[${endPage}, ${pageCount}]
+			<c:if test="${endPage < pageCount }">
+				<a href="${root }/board/list.do?pageNumber=${startPage+pageBlock}">[next]</a>
+			</c:if>
+		</c:if>
+	</center>
 </body>
 </html>

@@ -44,4 +44,13 @@
 		where #{startRow}<=rnum and rnum<=#{endRow}
 	]]>
 	</select>
+	
+	<update id="boardReadCount" parameterType="int">
+		update board set readcount = readcount +1
+		where boardnumber=#{boardNumber}
+	</update>
+	
+	<select id="boardRead" parameterType="int" resultMap="boardDTO">
+		select * from board where boardnumber=#{boardNumber}
+	</select>
 </mapper>
