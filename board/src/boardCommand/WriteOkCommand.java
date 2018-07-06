@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import boardModel.BoardDAO;
 import boardModel.BoardDTO;
 import command.Command;
 
@@ -30,6 +31,8 @@ public class WriteOkCommand implements Command{
 		
 		logger.info(logMsg + boardDTO.toString()); 
 		
+		int chk = BoardDAO.getInstance().insert(boardDTO);
+		logger.info(logMsg + chk);
 		return null;
 	}
 

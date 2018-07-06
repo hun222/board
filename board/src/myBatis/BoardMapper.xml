@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="myBatis.BoardMapper.xml">
+	<!-- DTO 변수명(필드)하고 데이터베이스 필드명이 다르면 작성해야한다. -->
+	<resultMap type="boardModel.BoardDTO" id="boardDTO">
+		<result column="writer" property="writer"/>
+		<result column="subject" property="subject"/>
+		<result column="email" property="email"/>
+		<result column="content" property="content"/>
+		<result column="password" property="password"/>
+		
+		<result column="boardNumber" property="boardNumber"/>
+		<result column="groupNumber" property="groupNumber"/>
+		<result column="sequenceNumber" property="sequenceNumber"/>
+		<result column="sequenceLevel" property="sequenceLevel"/>
+		
+		<result column="readCount" property="readCount"/>
+		<result column="writeDate" property="writeDate"/>
+	</resultMap>
+	
+	<select id="boardGroupNumberMax" resultType="int">
+		select nvl(max(groupNumber),0) from board	
+	</select>
+	
+	<insert id="boardInsert" parameterType="boardModel.BoardDTO">
+		insert into board values(
+		 #{writer}, #{subject}, #{email}, #{content}, #{password}, 
+		 #{writeDate}, #{readCount}, 
+		 board_board_number_sql.nextval, #{groupNumber}, #{sequenceNumber}, #{sequenceLevel})	
+	</insert>
+</mapper>

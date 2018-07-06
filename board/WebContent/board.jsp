@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>index</title>
 </head>
 <body>
 	<a href="http://localhost:8081/board/write.do">게시판 쓰기</a>
