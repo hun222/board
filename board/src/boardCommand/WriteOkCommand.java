@@ -33,7 +33,9 @@ public class WriteOkCommand implements Command{
 		
 		int chk = BoardDAO.getInstance().insert(boardDTO);
 		logger.info(logMsg + chk);
-		return null;
+		
+		request.setAttribute("chk", chk);
+		return "/WEB-INF/board/writeOk.jsp";
 	}
 
 }

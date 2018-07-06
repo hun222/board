@@ -31,4 +31,17 @@
 		 #{writeDate}, #{readCount}, 
 		 board_board_number_sql.nextval, #{groupNumber}, #{sequenceNumber}, #{sequenceLevel})	
 	</insert>
+	
+	<select id="countRow" resultType="int">
+		select count(*) from board
+	</select>
+	
+	<select id="boardList"  parameterType="java.util.Map" resultMap="boardDTO">
+	<![CDATA[
+		select * from(
+			select rownum as rnum, a.*
+			from(select * from board order by groupnumber desc, sequencenumber asc) a)
+		where #{startRow}<=rnum and rnum<=#{endRow}
+	]]>
+	</select>
 </mapper>

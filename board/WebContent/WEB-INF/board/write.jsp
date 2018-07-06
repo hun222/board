@@ -12,8 +12,7 @@
 </head>
 <body>
 <h3>${root }</h3>
-	<form class="form_style"  action="${root }/board/writeOk.do"  method="post" onsubmit="return checkForm(this)">	
-		${boardNumber} ,${groupNumber} ,${sequenceNumber}, ${sequenceLevel}
+	<form class="form_style"  action="${root }/board/writeOk.do"  method="post" onsubmit="return checkForm(this)">
 		<input type="hidden" name="boardNumber" value="${boardNumber}"/>
 		<input type="hidden" name="groupNumber" value="${groupNumber}"/>
 		<input type="hidden" name="sequenceNumber" value="${sequenceNumber}"/>

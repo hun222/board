@@ -1,5 +1,10 @@
 package boardModel;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
@@ -62,5 +67,38 @@ public class BoardDAO {
 		boardDTO.setGroupNumber(groupNumber);
 		boardDTO.setSequenceNumber(sequenceNumber);
 		boardDTO.setSequenceLevel(sequenceLevel);
+	}
+
+	public int getCount() {
+		int count = 0;
+		
+		try {
+			sqlSession = sqlSessionFactory.openSession();
+			count = sqlSession.selectOne("countRow");
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		return count;
+	}
+
+	public List<BoardDTO> getBoardList(int startRow, int endRow) {
+		List<BoardDTO> boardList = null;
+		Map<String, Integer> map = new HashMap<>();
+		
+		map.put("startRow", startRow);
+		map.put("endRow", endRow);
+		
+		try {
+			sqlSession = sqlSessionFactory.openSession();
+			boardList = sqlSession.selectList("boardList", map);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		
+		return boardList;
 	}
 }
