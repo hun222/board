@@ -21,7 +21,7 @@ public class Listcommand implements Command{
 		
 		// 페이지당 게시물 수를 정하고, 첫 행의 번호와 마지막 행의 번호를 구한다.
 		// 페이지당 게시물: 10개, 첫 행 번호: 1, 마지막 행 번호: 10
-		int boardSize = 2;	//10 -> 3 변경함.
+		int boardSize = 10;
 		int startRow = (currentPage-1)*boardSize+1;	
 		int endRow = currentPage*boardSize;
 		

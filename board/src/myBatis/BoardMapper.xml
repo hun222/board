@@ -53,4 +53,20 @@
 	<select id="boardRead" parameterType="int" resultMap="boardDTO">
 		select * from board where boardnumber=#{boardNumber}
 	</select>
+	
+	<update id="boardWriteNumber" parameterType="java.util.Map">
+	<![CDATA[
+		update board set sequenceNumber=sequenceNumber+1
+		where groupNumber = #{groupNumber} and sequenceNumber>#{sequenceNumber}	
+	]]>
+	</update>
+	
+	<delete id="deleteBoard" parameterType="java.util.Map">
+		delete from board where boardNumber = #{boardNumber} and password = #{password}
+	</delete>
+	
+	<update id="boardUpdate" parameterType="java.util.Map">
+		update board set subject=#{subject}, email=#{email}, content=#{content}
+		where boardNumber=#{boardNumber}
+	</update>
 </mapper>

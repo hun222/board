@@ -13,7 +13,7 @@
 <c:if test="${chk>0 }">
 	<script>
 		alert("글쓰기를 성공하셨습니다.");
-		location.href="${root}/board/write.do";
+		location.href="${root}/board/list.do";
 	</script>
 </c:if>
 

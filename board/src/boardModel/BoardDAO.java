@@ -61,7 +61,22 @@ public class BoardDAO {
 			sequenceNumber = boardDTO.getSequenceNumber();	// 0
 			sequenceLevel = boardDTO.getSequenceLevel();	// 0
 		}else {					// 댓글 - 글순서, 글레벨 처리
+			Map<String, Integer> map = new HashMap<>();
+			map.put("groupNumber", groupNumber);
+			map.put("sequenceNumber", sequenceNumber);
 			
+			try {
+				sqlSession = sqlSessionFactory.openSession();
+				sqlSession.update("boardWriteNumber",map);
+				sqlSession.commit();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				sqlSession.close();
+			}
+			
+			sequenceNumber = sequenceNumber+1;
+			sequenceLevel = sequenceLevel+1;
 		}
 		
 		boardDTO.setGroupNumber(groupNumber);
@@ -118,5 +133,55 @@ public class BoardDAO {
 		}
 		
 		return boardDTO;
+	}
+	
+	public int delete(int boardNumber, String password) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("boardNumber", boardNumber);
+		map.put("password", password);
+		int rst = 0;
+		
+		try {
+			sqlSession = sqlSessionFactory.openSession();
+			rst = sqlSession.delete("deleteBoard", map);
+			sqlSession.commit();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		
+		return rst;
+	}
+
+	public BoardDTO select(int boardNumber) {
+		BoardDTO boardDTO=null;
+		
+		try {
+			sqlSession = sqlSessionFactory.openSession();
+			boardDTO = sqlSession.selectOne("boardRead", boardNumber);
+			sqlSession.commit();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		
+		return boardDTO;
+	}
+
+	public int update(BoardDTO boardDTO) {
+		int rst = 0;
+		
+		try {
+			sqlSession = sqlSessionFactory.openSession();
+			rst = sqlSession.update("boardUpdate",boardDTO);
+			sqlSession.commit();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		return rst;
 	}
 }

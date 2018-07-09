@@ -8,7 +8,26 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>게시판 읽기</title>
-<link rel="stylesheet" type="text/css" href="style.css">
+<script>
+function replyFunc(root, boardNumber, groupNumber, sequenceNumber, sequenceLevel){
+	url = root+"/board/write.do?boardNumber="+boardNumber+"&groupNumber="+groupNumber
+	+"&sequenceNumber="+sequenceNumber+"&sequenceLevel="+sequenceLevel;
+	//alert(url);
+	location.href = url;
+}
+
+function deleteFunc(root, boardNumber, pageNumber){
+	url = root+"/board/delete.do?boardNumber="+boardNumber+"&pageNumber="+pageNumber;
+	//alert(url);
+	location.href = url;
+}
+
+function update(root, boardNumber, pageNumber){
+	url = root+"/board/update.do?boardNumber="+boardNumber+"&pageNumber="+pageNumber;
+	//alert(url);
+	location.href = url;
+}
+</script>
 </head>
 <body>
 	<table border="1" width="510" cellpadding="2"  cellspacing="0" align="center">
@@ -37,9 +56,10 @@
 		<c:set var="root" value="${pageContext.request.contextPath }"/>
 		<tr>
 			<td height="30" colspan="4" align="center">
-				<input type="button" value="글수정" onclick=" " />
-				<input type="button" value="글삭제" onclick=" "/>
-				<input type="button" value="답글" onclick=" "/>
+				<input type="button" value="글수정" onclick="update('${root}','${boardDTO.boardNumber }','${pageNumber }') " />
+				<input type="button" value="글삭제" onclick="deleteFunc('${root}','${boardDTO.boardNumber }','${pageNumber }')"/>
+				<input type="button" value="답글" onclick="replyFunc('${root}','${boardDTO.boardNumber }',
+				'${boardDTO.groupNumber }','${boardDTO.sequenceNumber }','${boardDTO.sequenceLevel }') "/>
 				<input type="button" value="글목록" onclick="location.href='${root}/board/list.do?pageNumber=${pageNumber }'"/> <!-- 목록 이동시 pageNumber 활용 -->
 			</td>
 		</tr>

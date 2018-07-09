@@ -14,6 +14,14 @@ public class WriteCommand implements Command{
 		int sequenceNumber = 0;
 		int sequenceLevel = 0;
 		
+		if(request.getParameter("boardNumber")!=null) {
+			System.out.println("boardNumber: "+boardNumber);
+			boardNumber = Integer.parseInt(request.getParameter("boardNumber"));
+			groupNumber = Integer.parseInt(request.getParameter("groupNumber"));
+			sequenceNumber = Integer.parseInt(request.getParameter("sequenceNumber"));
+			sequenceLevel = Integer.parseInt(request.getParameter("sequenceLevel"));
+		}
+		
 		request.setAttribute("boardNumber", boardNumber);
 		request.setAttribute("groupNumber", groupNumber);
 		request.setAttribute("sequenceNumber", sequenceNumber);

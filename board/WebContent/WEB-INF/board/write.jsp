@@ -19,7 +19,7 @@
 		<input type="hidden" name="sequenceLevel" value="${sequenceLevel}"/>
 			
 		<div style="width:598px; height:15px; border-width:2px; text-align:right; padding:15px 0px 0px 0px; border-bottom-width:0px;">
-				글목록
+				<a href="${root}/board/list.do">글목록</a>
 		</div>
 			
 		<div class="line">
@@ -58,7 +58,7 @@
 		<div class="line" style="width:598px; border-width:2px; text-align:center;">
 			<input type="submit" value="글쓰기"/>
 			<input type="reset" value="다시작성"/>
-			<input type="button" value="목록보기" onclick=" "/>
+			<input type="button" value="목록보기" onclick="location.href='${root}/board/list.do'"/>
 		</div>
 	</form>
 </body>

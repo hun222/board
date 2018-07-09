@@ -40,10 +40,17 @@
 		<c:forEach var="board" items="${boardList }">
 			<tr>
 				<td>${board.boardNumber }</td>
-				<td><a href="${root }/board/read.do?boardNumber=${board.boardNumber }&pageNumber=${currentPage}">${board.subject }</a></td>
+				<td>
+				<c:if test="${board.sequenceLevel > 0 }">
+					<c:forEach begin="0" end="${board.sequenceLevel }" step="1">
+						&nbsp;&nbsp;
+					</c:forEach>
+				</c:if>
+				<a href="${root }/board/read.do?boardNumber=${board.boardNumber }&pageNumber=${currentPage}">${board.subject }</a>
+				</td>
 				<td>${board.writer }</td>
 				<td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.writeDate }"/></td>
-				<td>0</td>
+				<td>${board.readCount }</td>
 			</tr>
 		</c:forEach>
 	</table>
@@ -54,7 +61,7 @@
 	<!-- 페이지 번호 -->
 	<center>
 		<c:if test="${count >0}">
-			<c:set var="pageBlock" value="${2 }"/>
+			<c:set var="pageBlock" value="${10 }"/>
 			<!-- 전체 페이지 번호 = 총 레코드 수/페이지당 게시물 수 -->
 			<c:set var="pageCount" value="${count/boardSize + (count%boardSize==0?0:1)}"/>
 			
