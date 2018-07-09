@@ -1,7 +1,9 @@
 function checkForm(boardForm){
-
-}
-
-function deleteCheck(deleteForm){
-
+	if(boardForm.writer.value==""){
+		alert("input writer");
+		boardForm.writer.focus();
+		return false;
+	}
+	
+	return true;
 }
